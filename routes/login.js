@@ -9,14 +9,7 @@ const handleSingIn = (req, res, db, bcrypt) => {
       .then((data) => {
          const isValid = bcrypt.compareSync(password, data[0].password);
          if (isValid) {
-            return db
-               .select("*")
-               .from("task")
-               .where("userId", "=", data[0].id)
-               .then((task) => {
-                  res.json(task);
-               })
-               .catch((error) => res.status(400).json({ error }));
+            res.send({ message: "Login Successfull!" });
          } else {
             res.status(400).json({ error: "Wrong credintials!" });
          }
